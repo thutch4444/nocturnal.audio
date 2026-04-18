@@ -61,10 +61,10 @@ music:
   note: Audio hosted externally — tracks will link to Dropbox or SoundCloud when
     connected.
   tracks:
-    - title: Late Night Sessions Vol. 1
-      artist: Nocturnal Audio
+    - title: Conquer Your Fears
+      artist: SignalNoiseRadio
       duration: 3:42
-      url: ""
+      url: https://www.dropbox.com/scl/fi/6wld2n1idzag0dqpaoqtk/Conquer-Your-Fears-V2.mp3?rlkey=b80eo6fyeymn0fylvdnu5fnoj&dl=0
     - title: Room Acoustics Demo
       artist: Nocturnal Audio
       duration: 4:10
