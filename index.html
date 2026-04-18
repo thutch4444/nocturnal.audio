@@ -350,8 +350,19 @@
   let currentTrackIndex = 0;
   let isPlaying = false;
 
-  fetch('content.yml')
-    .then(r => r.text())
+  const contentPaths = ['content.yml', './content.yml', '/content.yml'];
+
+  function fetchContentYaml() {
+    return contentPaths.reduce((promise, path) => {
+      return promise.catch(() => fetch(path));
+    }, Promise.reject(new Error('No content path tried')));
+  }
+
+  fetchContentYaml()
+    .then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status} for ${r.url}`);
+      return r.text();
+    })
     .then(text => {
       const d = jsyaml.load(text);
       buildSite(d);
@@ -360,7 +371,7 @@
     })
     .catch(err => {
       console.error('Could not load content.yml', err);
-      document.getElementById('loading').innerHTML = '<div style="color:#776e64;font-family:sans-serif;font-size:14px;">Could not load content. Check content.yml exists.</div>';
+      document.getElementById('loading').innerHTML = '<div style="color:#776e64;font-family:sans-serif;font-size:14px;">Could not load content. Check content.yml exists and is reachable from the site root.</div>';
     });
 
   function buildSite(d) {
