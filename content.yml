@@ -84,10 +84,10 @@ merch:
       price: $34
       image: "images/merch-hat.jpg"
       alt: Nocturnal Audio 5-panel hat
-    - name: Sticker Pack — Vol. 1
-      price: $12
-      image: "images/merch-stickers.jpg"
-      alt: Nocturnal Audio sticker pack
+    - name: Utility Bag
+      price: $30
+      image: "images/merch-utility-bag.jpg"
+      alt: Utility Bag
 contact:
   label: Get in Touch
   title: Ready to make something?
