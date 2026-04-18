@@ -2,26 +2,29 @@ site:
   title: Nocturnal Audio
   tagline: Jacksonville, FL — Creative Collective
   email: info@nocturnal.audio
-  phone: "(904) 555-0100"
+  phone: (904) 555-0100
   city: Jacksonville, FL
-  instagram: "https://instagram.com"
-  facebook: "https://facebook.com"
-  soundcloud: "https://soundcloud.com"
-
+  instagram: https://instagram.com
+  facebook: https://facebook.com
+  soundcloud: https://soundcloud.com
 hero:
   eyebrow: Jacksonville, FL — Creative Collective
   headline_line1: WHERE
-  headline_line2: NIGHT
-  headline_line3: MAKES
-  headline_line4: SOUND
-  subheading: Songwriters, musicians, engineers, artists, and event planners — working together after dark to make creative projects come to life.
+  headline_line2: NIGHTS
+  headline_line3: ARE
+  headline_line4: CREATIVE...
+  subheading: Songwriters, musicians, engineers, artists, and event planners —
+    working together after dark to make creative projects come to life.
   cta_primary: Work With Us
   cta_secondary: Our Story
-
 about:
   label: Who We Are
-  text: "Nocturnal Audio is a collective — a group of songwriters, musicians, recording engineers, visual artists, and event planners united by one thing: a passion for bringing creative projects to life. We don't just run sound. We collaborate, we produce, we develop artists, we build brands, and we make moments that people carry with them. If you've got a vision and need a crew to help realize it, you found your people."
-
+  text: "Nocturnal Audio is a collective — a group of songwriters, musicians,
+    recording engineers, visual artists, and event planners united by one thing:
+    a passion for bringing creative projects to life. We don't just run sound.
+    We collaborate, we produce, we develop artists, we build brands, and we make
+    moments that people carry with them. If you've got a vision and need a crew
+    to help realize it, you found your people."
 services:
   - name: Event A/V
     description: Full production sound & lighting for any stage or occasion
@@ -33,7 +36,6 @@ services:
     description: Brand, sound, and strategy for emerging artists
   - name: Merch Development
     description: Design, production, and fulfillment for artists & events
-
 gallery:
   label: Events & Sessions
   title: Recent Work
@@ -53,46 +55,46 @@ gallery:
     - tag: Recording
       image: ""
       alt: Recording session photo
-
 music:
   label: Listen
   title: Featured Tracks
-  note: Audio hosted externally — tracks will link to Dropbox or SoundCloud when connected.
+  note: Audio hosted externally — tracks will link to Dropbox or SoundCloud when
+    connected.
   tracks:
     - title: Late Night Sessions Vol. 1
       artist: Nocturnal Audio
-      duration: "3:42"
+      duration: 3:42
       url: ""
     - title: Room Acoustics Demo
       artist: Nocturnal Audio
-      duration: "4:10"
+      duration: 4:10
       url: ""
     - title: Live at The Garage
       artist: Nocturnal Audio
-      duration: "5:28"
+      duration: 5:28
       url: ""
-
 merch:
   label: Merch
   title: Get Nocturnal
   items:
     - name: Nocturnal Tee — Black
-      price: "$28"
+      price: $28
       image: ""
       alt: Nocturnal Audio black tee
     - name: 5-Panel Hat
-      price: "$34"
+      price: $34
       image: ""
       alt: Nocturnal Audio 5-panel hat
     - name: Sticker Pack — Vol. 1
-      price: "$12"
+      price: $12
       image: ""
       alt: Nocturnal Audio sticker pack
-
 contact:
   label: Get in Touch
   title: Ready to make something?
-  body: "Whether you're an artist looking to grow, a band ready to record, or a brand planning an event — the Nocturnal Audio collective is here. Based in Jacksonville, FL and available across the region."
+  body: Whether you're an artist looking to grow, a band ready to record, or a
+    brand planning an event — the Nocturnal Audio collective is here. Based in
+    Jacksonville, FL and available across the region.
   services:
     - Event A/V
     - Live Recording
