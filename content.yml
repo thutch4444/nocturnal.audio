@@ -60,18 +60,18 @@ music:
   title: Featured Tracks
   note: Audio hosted locally — add audio files in audio/ and use relative URLs.
   tracks:
-    - title: Room Acoustics Demo
-      artist: Nocturnal Audio
-      duration: 0:05
-      url: "audio/room-acoustics-demo.wav"
-    - title: Live at The Garage
-      artist: Nocturnal Audio
-      duration: 0:05
-      url: "audio/live-at-the-garage.wav"
-    - title: Conquer Your Fears
+    - title: Calm Down Demo
       artist: SignalNoiseRadio
-      duration: 0:05
-      url: "audio/conquer-your-fears.wav"
+      duration: 3:14
+      url: "audio/Calm Down DEMO.mp3"
+    - title: Silverman Radio Spoof for Film
+      artist: Nocturnal Audio
+      duration: 0:41
+      url: "audio/Silverman Radio Spoof.mp3"
+    - title: TNP PodcastBumper Music
+      artist: Nocturnal Audio
+      duration: 0:36
+      url: "audio/TNP Bumper Music.mp3"
 merch:
   label: Merch
   title: Get Nocturnal
