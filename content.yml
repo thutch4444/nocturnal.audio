@@ -46,12 +46,12 @@ gallery:
     - tag: Studio Session
       image: "images/gallery-2.jpg"
       alt: Studio session photo
-    - tag: Artist Showcase
+    - tag: Artwork & Merch
       image: "images/gallery-3.jpg"
-      alt: Artist showcase photo
-    - tag: Corporate A/V
+      alt: Artwork & Merch photo
+    - tag: Artist Development
       image: "images/gallery-4.jpg"
-      alt: Corporate A/V photo
+      alt: Artist development photo
     - tag: Recording
       image: "images/gallery-5.jpg"
       alt: Recording session photo
