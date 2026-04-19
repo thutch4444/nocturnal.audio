@@ -76,19 +76,21 @@ merch:
   label: Merch
   title: Get Nocturnal
   items:
-    - name: Nocturnal Tee — Black
+    - name: Nocturnal Tee
       price: $28
       image: "images/merch-tee.jpg"
-      alt: Nocturnal Audio black tee
+      alt: Nocturnal Audio Tee
+      url: "https://nocturnal-audio.myshopify.com/products/unisex-classic-tee"
     - name: Nocturnal Audio Snapback Hat
       price: $34
       image: "images/merch-hat.jpg"
       alt: Nocturnal Audio Snapback Hat
-      url: "https://nocturnal-audio.myshopify.com/products/snapback-hat?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web"
+      url: "https://nocturnal-audio.myshopify.com/products/snapback-hat"
     - name: Utility Bag
       price: $30
       image: "images/merch-utility-bag.jpg"
       alt: Utility Bag
+      url: "https://nocturnal-audio.myshopify.com/products/utility-crossbody-bag"
 contact:
   label: Get in Touch
   title: Ready to make something?
