@@ -4,7 +4,14 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 
-# Contact form headers for Netlify
+/*.svg
+  Content-Type: image/svg+xml
+  Access-Control-Allow-Origin: *
+
+/*.yml
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+
 /contact
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Headers: *
