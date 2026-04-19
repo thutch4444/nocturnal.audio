@@ -200,6 +200,7 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   nav a:not(.nav-cta):not(.hamburger) { display: none; }
+  .nav-cta { display: none; }
   .hamburger {
     display: flex;
     flex-direction: column;
