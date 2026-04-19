@@ -21,7 +21,8 @@
 
   <header>
     <a href="/" class="logo"><img src="images/logo.png" alt="Nocturnal Audio logo"></a>
-    <nav>
+    <!-- Desktop nav — hidden on mobile via CSS -->
+    <nav class="desktop-nav">
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#gallery">Events</a>
@@ -29,20 +30,22 @@
       <a href="#merch">Merch</a>
       <a href="remote-sessions.html">Remote</a>
       <a href="#contact" class="nav-cta">Work With Us</a>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
     </nav>
+    <!-- Hamburger — hidden on desktop via CSS, shown on mobile -->
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
+  <!-- Mobile dropdown menu -->
   <div class="mobile-menu" id="mobile-menu">
     <a href="#about" onclick="closeMobileMenu()">About</a>
     <a href="#services" onclick="closeMobileMenu()">Services</a>
     <a href="#gallery" onclick="closeMobileMenu()">Events</a>
     <a href="#music" onclick="closeMobileMenu()">Music</a>
     <a href="#merch" onclick="closeMobileMenu()">Merch</a>
-    <a href="remote-sessions.html">Remote Sessions</a>
-    <a href="#contact" class="nav-cta" onclick="closeMobileMenu()">Work With Us</a>
+    <a href="remote-sessions.html" onclick="closeMobileMenu()">Remote Sessions</a>
+    <a href="#contact" onclick="closeMobileMenu()">Work With Us</a>
   </div>
 
   <!-- HERO -->

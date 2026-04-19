@@ -286,16 +286,29 @@
 <!-- HEADER -->
 <header>
   <a href="/" class="logo"><img src="images/logo.png" alt="Nocturnal Audio logo"></a>
-  <nav>
+  <nav class="desktop-nav">
     <a href="/#about">About</a>
     <a href="/#services">Services</a>
     <a href="/#gallery">Events</a>
     <a href="/#music">Music</a>
     <a href="/#merch">Merch</a>
     <a href="/remote-sessions.html" class="active">Remote</a>
-    <a href="/#contact" class="nav-cta">Work With Us</a>
+    <a href="#book" class="nav-cta">Book a Session</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/#about">About</a>
+  <a href="/#services">Services</a>
+  <a href="/#gallery">Events</a>
+  <a href="/#music">Music</a>
+  <a href="/#merch">Merch</a>
+  <a href="#book">Book a Session</a>
+</div>
 
 <!-- HERO -->
 <div class="remote-hero">
@@ -615,5 +628,22 @@
   <div class="footer-copy">© 2026 Nocturnal Audio LLC</div>
 </footer>
 
+
+<script>
+(function() {
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (!hamburger || !mobileMenu) return;
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('open');
+  });
+  document.addEventListener('click', function(e) {
+    if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
+      mobileMenu.classList.remove('open');
+    }
+  });
+})();
+</script>
 </body>
 </html>
