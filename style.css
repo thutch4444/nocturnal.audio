@@ -202,7 +202,7 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
   nav a:not(.nav-cta):not(.hamburger) { display: none; }
   .nav-cta { display: none; }
   .hamburger {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
