@@ -1,6 +1,4 @@
 // ── NOCTURNAL AUDIO — site.js ──
-// Fetches content.yml and builds the page dynamically.
-// Falls back gracefully if fetch fails (e.g. opening file:// locally).
 
 const placeholderSVG = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="15" cy="18" r="4"/><path d="M4 28l8-7 6 5 5-4 13 10"/></svg>`;
 const musicNoteSVG = `<svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3 8.5l-4 2.5V5l4 2.5z"/></svg>`;
@@ -18,8 +16,6 @@ let currentTrackIndex = 0;
 let isPlaying = false;
 
 // ── BOOT ──
-// Try fetching content.yml. If that fails (e.g. local file:// or CORS),
-// show a helpful error rather than a blank loading screen.
 fetch('/content.yml')
   .then(r => {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -30,10 +26,11 @@ fetch('/content.yml')
     buildSite(data);
     document.getElementById('loading').style.display = 'none';
     document.getElementById('app').style.display = 'block';
+    // ── HAMBURGER — init AFTER app is visible so elements exist ──
+    initHamburger();
   })
   .catch(err => {
     console.warn('fetch /content.yml failed:', err.message);
-    // Show friendly local dev message
     document.getElementById('loading').innerHTML = `
       <div style="color:#776e64;font-family:sans-serif;font-size:14px;text-align:center;max-width:400px;padding:2rem;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:#ede8df;margin-bottom:1rem;">
@@ -55,6 +52,30 @@ if (window.netlifyIdentity) {
       window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
     }
   });
+}
+
+// ── HAMBURGER ──
+// Called only after #app is shown so getElementById works
+function initHamburger() {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!hamburger || !mobileMenu) return;
+
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
+      mobileMenu.classList.remove('open');
+    }
+  });
+}
+
+function closeMobileMenu() {
+  const m = document.getElementById('mobile-menu');
+  if (m) m.classList.remove('open');
 }
 
 // ── BUILD SITE ──
@@ -301,22 +322,4 @@ function initContactForm() {
     btn.style.background = '#c0392b';
     setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; }, 3000);
   });
-}
-
-// Mobile hamburger menu
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-  document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-      mobileMenu.classList.remove('open');
-    }
-  });
-}
-function closeMobileMenu() {
-  const m = document.getElementById('mobile-menu');
-  if (m) m.classList.remove('open');
 }
