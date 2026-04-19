@@ -75,7 +75,7 @@ music:
 merch:
   label: Merch
   title: Get Nocturnal
- items:
+  items:
     - name: Nocturnal Tee
       price: $28
       image: "images/merch-tee.jpg"
