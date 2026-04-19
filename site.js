@@ -147,7 +147,7 @@ function buildSite(d) {
 // ── TRACK LIST ──
 function renderTrackList() {
   document.getElementById('track-list').innerHTML = tracks.map((t, i) => `
-    <div class="track-item${i === currentTrackIndex ? ' active' : ''}" data-index="${i}">
+    <div class="track-item${i === currentTrackIndex ? ' active' : ''}${i === currentTrackIndex && isPlaying ? ' playing' : ''}" data-index="${i}">
       <div class="track-bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
       <div class="track-num-wrap"><span class="track-num">${i + 1}</span></div>
       <div class="track-art">${musicNoteSVG}</div>
@@ -233,13 +233,15 @@ function selectTrack(index) {
 
 function playTrack() {
   if (!audio.src) return;
-  audio.play().then(() => { isPlaying = true; updatePlayButton(); }).catch(() => { isPlaying = false; updatePlayButton(); });
+  audio.play().then(() => { isPlaying = true; updatePlayButton(); updateTrackNote(); renderTrackList(); }).catch(() => { isPlaying = false; updatePlayButton(); updateTrackNote(); renderTrackList(); });
 }
 
 function pauseTrack() {
   audio.pause();
   isPlaying = false;
   updatePlayButton();
+  updateTrackNote();
+  renderTrackList();
 }
 
 function updatePlayButton() {
@@ -271,9 +273,13 @@ function updateTrackNote(msg) {
   if (!note) return;
   if (msg) { note.textContent = msg; return; }
   const track = tracks[currentTrackIndex];
-  note.textContent = track && track.url
+  if (!track || !track.url) {
+    note.textContent = 'Add audio files to your audio/ folder and set URLs in content.yml';
+    return;
+  }
+  note.textContent = isPlaying
     ? `Now playing: ${track.title} — ${track.artist}`
-    : 'Add audio files to your audio/ folder and set URLs in content.yml';
+    : `Ready to play: ${track.title} — ${track.artist}`;
 }
 
 // ── CONTACT FORM ──
