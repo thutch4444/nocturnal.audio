@@ -84,7 +84,8 @@ merch:
       price: $34
       image: "images/merch-hat.jpg"
       alt: Nocturnal Audio 5-panel hat
-      url:"https://nocturnal-audio.myshopify.com/products/snapback-hat?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web"
+      url: "https://nocturnal-audio-shop.myshopify.com/products/5-panel-hat"
+      url:"https://your-shopify-store.myshopify.com/products/panel-hat"
     - name: Utility Bag
       price: $30
       image: "images/merch-utility-bag.jpg"

@@ -147,7 +147,8 @@
   /* MERCH */
   .merch-section { background: var(--off-black); border-top: 1px solid #1c1a18; }
   .merch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .merch-card { border: 1px solid #1c1a18; border-radius: 2px; overflow: hidden; background: var(--dark); }
+  .merch-card, .merch-card-link { border: 1px solid #1c1a18; border-radius: 2px; overflow: hidden; background: var(--dark); text-decoration: none; color: inherit; display: block; transition: border-color 0.2s; }
+  .merch-card-link:hover { border-color: var(--warm-1); }
   .merch-img { aspect-ratio: 1; background: #111; display: flex; align-items: center; justify-content: center; color: #2a2520; border-bottom: 1px solid #1c1a18; overflow: hidden; }
   .merch-img img { width: 100%; height: 100%; object-fit: cover; }
   .merch-info { padding: 16px; }
@@ -432,7 +433,7 @@
     document.getElementById('merch-label').textContent = d.merch.label;
     document.getElementById('merch-title').textContent = d.merch.title;
     document.getElementById('merch-grid').innerHTML = d.merch.items.map(item => `
-      <div class="merch-card">
+      ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener" class="merch-card-link">` : '<div class="merch-card">'}
         <div class="merch-img">
           ${item.image
             ? `<img src="${item.image}" alt="${item.alt}">`
@@ -441,9 +442,9 @@
         <div class="merch-info">
           <div class="merch-name">${item.name}</div>
           <div class="merch-price">${item.price}</div>
-          <button class="merch-add">Add to Cart</button>
+          <button class="merch-add">${item.url ? 'View Product' : 'Add to Cart'}</button>
         </div>
-      </div>`).join('');
+      ${item.url ? '</a>' : '</div>'}`).join('');
 
     // CONTACT
     document.getElementById('contact-label').textContent = d.contact.label;
