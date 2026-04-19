@@ -305,7 +305,7 @@
           <span id="contact-city"></span>
         </div>
       </div>
-      <form name="contact" method="POST" data-netlify="true" id="contact-form">
+      <form name="contact" method="POST" data-netlify="true" action="/" id="contact-form">
         <input type="hidden" name="form-name" value="contact">
         <div class="form-row">
           <div class="form-field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
@@ -618,6 +618,62 @@
       note.textContent = `Audio hosted externally — tracks will link to Dropbox or SoundCloud when connected.`;
     }
   }
+
+  // Contact form handling for Netlify forms
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    // Listen for Netlify form events
+    form.addEventListener('submit', function(e) {
+      const submitBtn = form.querySelector('.form-submit');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+    });
+
+    // Handle successful submission
+    document.addEventListener('nfFormSubmitSuccess', function(event) {
+      const form = document.getElementById('contact-form');
+      const submitBtn = form.querySelector('.form-submit');
+      const originalText = 'Send Message';
+      
+      submitBtn.textContent = 'Message Sent!';
+      submitBtn.style.background = 'var(--warm-1)';
+      form.reset();
+      
+      // Reset button after 3 seconds
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.background = '';
+        submitBtn.disabled = false;
+      }, 3000);
+    });
+
+    // Handle submission error
+    document.addEventListener('nfFormSubmitError', function(event) {
+      const form = document.getElementById('contact-form');
+      const submitBtn = form.querySelector('.form-submit');
+      const originalText = 'Send Message';
+      
+      submitBtn.textContent = 'Error - Try Again';
+      submitBtn.style.background = '#f44336';
+      
+      // Reset button after 3 seconds
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.background = '';
+        submitBtn.disabled = false;
+      }, 3000);
+    });
+  }
+
+  // Initialize everything
+  document.addEventListener('DOMContentLoaded', function() {
+    initContactForm();
+  });
 </script>
 </body>
 </html>
