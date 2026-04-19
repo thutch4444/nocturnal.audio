@@ -1,0 +1,111 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - name: "content"
+        label: "All Content"
+        file: "content.yml"
+        fields:
+
+          - label: "Site Info"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Site Title", name: "title", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "City", name: "city", widget: "string" }
+              - { label: "Instagram URL", name: "instagram", widget: "string" }
+              - { label: "Facebook URL", name: "facebook", widget: "string" }
+              - { label: "SoundCloud URL", name: "soundcloud", widget: "string" }
+
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow Text", name: "eyebrow", widget: "string" }
+              - { label: "Headline Line 1", name: "headline_line1", widget: "string" }
+              - { label: "Headline Line 2 (orange)", name: "headline_line2", widget: "string" }
+              - { label: "Headline Line 3 (dim)", name: "headline_line3", widget: "string" }
+              - { label: "Headline Line 4", name: "headline_line4", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "text" }
+              - { label: "Primary Button Text", name: "cta_primary", widget: "string" }
+              - { label: "Secondary Button Text", name: "cta_secondary", widget: "string" }
+
+          - label: "About Section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Body Text", name: "text", widget: "text" }
+
+          - label: "Services"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Service Name", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
+
+          - label: "Gallery"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Section Title", name: "title", widget: "string" }
+              - label: "Photos"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Tag/Caption", name: "tag", widget: "string" }
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "Alt Text", name: "alt", widget: "string" }
+
+          - label: "Music Player"
+            name: "music"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Player Note", name: "note", widget: "string" }
+              - label: "Tracks"
+                name: "tracks"
+                widget: "list"
+                fields:
+                  - { label: "Track Title", name: "title", widget: "string" }
+                  - { label: "Artist", name: "artist", widget: "string" }
+                  - { label: "Duration (e.g. 3:42)", name: "duration", widget: "string" }
+                  - { label: "Audio URL (Dropbox or SoundCloud)", name: "url", widget: "string", required: false }
+
+          - label: "Merch"
+            name: "merch"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Section Title", name: "title", widget: "string" }
+              - label: "Products"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Product Name", name: "name", widget: "string" }
+                  - { label: "Price", name: "price", widget: "string" }
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "Alt Text", name: "alt", widget: "string" }
+
+          - label: "Contact Section"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body Text", name: "body", widget: "text" }
+              - label: "Service Options (dropdown)"
+                name: "services"
+                widget: "list"
+                field: { label: "Option", name: "option", widget: "string" }

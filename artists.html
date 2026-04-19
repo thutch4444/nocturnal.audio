@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artists — Nocturnal Audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Page-specific styles */
+  .artist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .artist-card {
+    border: 1px solid #1c1a18;
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--dark);
+    transition: border-color 0.2s;
+  }
+  .artist-card:hover { border-color: var(--warm-1); }
+  .artist-photo {
+    aspect-ratio: 1;
+    background: #111;
+    overflow: hidden;
+    border-bottom: 1px solid #1c1a18;
+  }
+  .artist-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .artist-photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #2a2520;
+  }
+  .artist-info { padding: 20px; }
+  .artist-name { font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; color: var(--white); margin-bottom: 4px; }
+  .artist-role { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-1); margin-bottom: 12px; }
+  .artist-bio { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .artist-links { margin-top: 16px; display: flex; gap: 12px; }
+  .artist-link { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .artist-link:hover { color: var(--warm-1); }
+
+  @media (max-width: 768px) {
+    .artist-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">NOCTURNAL<span>.</span>AUDIO</a>
+  <nav>
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/artists.html" class="active">Artists</a>
+    <a href="/#music">Music</a>
+    <a href="/#merch">Merch</a>
+    <a href="/#contact" class="nav-cta">Work With Us</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-label">The Collective</div>
+  <h1 class="page-hero-title">OUR<br><span style="color:var(--warm-1)">ARTISTS</span></h1>
+  <p class="page-hero-sub">The musicians, songwriters, and creatives that make up the Nocturnal Audio collective.</p>
+</div>
+
+<section style="background: var(--off-black); padding: 4rem 2rem;">
+  <div class="artist-grid">
+
+    <!-- ARTIST CARD — duplicate and fill in for each artist -->
+    <div class="artist-card">
+      <div class="artist-photo">
+        <div class="artist-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="24" cy="18" r="10"/>
+            <path d="M4 44c0-11 9-20 20-20s20 9 20 20"/>
+          </svg>
+        </div>
+      </div>
+      <div class="artist-info">
+        <div class="artist-name">Artist Name</div>
+        <div class="artist-role">Songwriter / Producer</div>
+        <p class="artist-bio">Short bio about this artist — what they do, their style, and what they bring to the collective.</p>
+        <div class="artist-links">
+          <a href="#" class="artist-link">Instagram</a>
+          <a href="#" class="artist-link">SoundCloud</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-card">
+      <div class="artist-photo">
+        <div class="artist-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="24" cy="18" r="10"/>
+            <path d="M4 44c0-11 9-20 20-20s20 9 20 20"/>
+          </svg>
+        </div>
+      </div>
+      <div class="artist-info">
+        <div class="artist-name">Artist Name</div>
+        <div class="artist-role">Engineer / Mixer</div>
+        <p class="artist-bio">Short bio about this artist — what they do, their style, and what they bring to the collective.</p>
+        <div class="artist-links">
+          <a href="#" class="artist-link">Instagram</a>
+          <a href="#" class="artist-link">SoundCloud</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="artist-card">
+      <div class="artist-photo">
+        <div class="artist-photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="24" cy="18" r="10"/>
+            <path d="M4 44c0-11 9-20 20-20s20 9 20 20"/>
+          </svg>
+        </div>
+      </div>
+      <div class="artist-info">
+        <div class="artist-name">Artist Name</div>
+        <div class="artist-role">Visual Artist / Designer</div>
+        <p class="artist-bio">Short bio about this artist — what they do, their style, and what they bring to the collective.</p>
+        <div class="artist-links">
+          <a href="#" class="artist-link">Instagram</a>
+          <a href="#" class="artist-link">Portfolio</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <a href="/" class="footer-logo">NOCTURNAL<span>.</span>AUDIO</a>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/nocturnal.audio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a>
+  </div>
+  <div class="footer-copy">© 2026 Nocturnal Audio LLC</div>
+</footer>
+
+</body>
+</html>
