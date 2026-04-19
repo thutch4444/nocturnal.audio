@@ -259,4 +259,4 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
   .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
   .form-row { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-}}
+}
