@@ -44,11 +44,11 @@ header {
 .logo img { display: block; max-height: 48px; width: auto; height: auto; }
 .logo span { color: var(--warm-1); }
 nav { display: flex; gap: 1.75rem; align-items: center; }
+.hamburger { display: none; }
 nav a { font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 nav a:hover { color: var(--white); }
 nav a.active { color: var(--white); }
 .nav-cta { color: var(--white) !important; background: var(--warm-2); padding: 8px 18px; border-radius: 2px; }
-.hamburger { display: none; }
 .nav-cta:hover { background: var(--warm-3) !important; }
 
 /* ── BUTTONS ── */
