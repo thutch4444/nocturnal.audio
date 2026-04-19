@@ -351,29 +351,114 @@
   let currentTrackIndex = 0;
   let isPlaying = false;
 
-  const contentPaths = ['content.yml', './content.yml', '/content.yml'];
+  // Inline content data to avoid fetch issues
+  const contentData = jsyaml.load(`
+site:
+  title: Nocturnal Audio
+  tagline: Jacksonville, FL — Creative Collective
+  email: info@nocturnal.audio
+  phone: (904) 424-2380
+  city: North Florida
+  instagram: https://www.instagram.com/nocturnal.audio/
+  facebook: https://facebook.com
+  soundcloud: https://soundcloud.com
+hero:
+  eyebrow: Nocturnal.Audio - A Creative Collective
+  headline_line1: WE STAY
+  headline_line2: UP LATE
+  headline_line3: TO
+  headline_line4: CREATE....
+  subheading: Songwriters, musicians, engineers, artists, and event planners — working together after dark to make creative projects come to life.
+  cta_primary: Work With Us
+  cta_secondary: Our Story
+about:
+  label: Who We Are
+  text: "Nocturnal Audio is a collective — a group of songwriters, musicians, recording engineers, visual artists, and event planners united by one thing: a passion for bringing creative projects to life. We don't just run sound. We collaborate, we produce, we develop artists, we build brands, and we make moments that people carry with them. If you've got a vision and need a crew to help realize it, you found your people."
+services:
+  - name: Event A/V
+    description: Full production sound & lighting for any stage or occasion
+  - name: Live Recording
+    description: Studio-grade mobile rigs that capture your performance
+  - name: Music Production
+    description: Tracking, mixing, and mastering for artists at every level
+  - name: Artist Development
+    description: Brand, sound, and strategy for emerging artists
+  - name: Merch Development
+    description: Design, production, and fulfillment for artists & events
+gallery:
+  label: Events & Sessions
+  title: Recent Work
+  items:
+    - tag: Live Event
+      image: "images/gallery-feature.jpg"
+      alt: Live event photo
+    - tag: Studio Session
+      image: "images/gallery-2.jpg"
+      alt: Studio session photo
+    - tag: Artwork & Merch
+      image: "images/gallery-3.jpg"
+      alt: Artwork & Merch photo
+    - tag: Artist Development
+      image: "images/gallery-4.jpg"
+      alt: Artist development photo
+    - tag: Recording
+      image: "images/gallery-5.jpg"
+      alt: Recording session photo
+music:
+  label: Listen
+  title: Featured Tracks
+  note: Audio hosted locally — add audio files in audio/ and use relative URLs.
+  tracks:
+    - title: Calm Down Demo
+      artist: SignalNoiseRadio
+      duration: 3:14
+      url: "audio/Calm Down DEMO.mp3"
+    - title: Silverman Radio Spoof for Film
+      artist: Nocturnal Audio
+      duration: 0:41
+      url: "audio/Silverman Radio Spoof.mp3"
+    - title: TNP PodcastBumper Music
+      artist: Nocturnal Audio
+      duration: 0:36
+      url: "audio/TNP Bumper Music.mp3"
+merch:
+  label: Merch
+  title: Get Nocturnal
+  items:
+    - name: Nocturnal Tee — Black
+      price: $28
+      image: "images/merch-tee.jpg"
+      alt: Nocturnal Audio black tee
+    - name: 5-Panel Hat
+      price: $34
+      image: "images/merch-hat.jpg"
+      alt: Nocturnal Audio 5-panel hat
+      url: "https://nocturnal-audio-shop.myshopify.com/products/5-panel-hat"
+    - name: Utility Bag
+      price: $30
+      image: "images/merch-utility-bag.jpg"
+      alt: Utility Bag
+contact:
+  label: Get in Touch
+  title: Ready to make something?
+  body: Whether you're an artist looking to grow, a band ready to record, or a brand planning an event — the Nocturnal Audio collective is here. Based in Jacksonville, FL and available across the region.
+  services:
+    - Event A/V
+    - Live Recording
+    - Music Production
+    - Artist Development
+    - Merch Development
+`);
 
-  function fetchContentYaml() {
-    return contentPaths.reduce((promise, path) => {
-      return promise.catch(() => fetch(path));
-    }, Promise.reject(new Error('No content path tried')));
+  // Initialize the site with inline content
+  try {
+    buildSite(contentData);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  } catch (err) {
+    console.error('Could not load content', err);
+    document.getElementById('loading').innerHTML = '<div style="color:#776e64;font-family:sans-serif;font-size:14px;">Could not load content. Check content.yml exists and is reachable from the site root.</div>';
   }
-
-  fetchContentYaml()
-    .then(r => {
-      if (!r.ok) throw new Error(`HTTP ${r.status} for ${r.url}`);
-      return r.text();
-    })
-    .then(text => {
-      const d = jsyaml.load(text);
-      buildSite(d);
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-    })
-    .catch(err => {
-      console.error('Could not load content.yml', err);
-      document.getElementById('loading').innerHTML = '<div style="color:#776e64;font-family:sans-serif;font-size:14px;">Could not load content. Check content.yml exists and is reachable from the site root.</div>';
-    });
 
   function buildSite(d) {
     // HERO
