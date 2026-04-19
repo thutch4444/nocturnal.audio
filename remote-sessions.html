@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remote Sessions — Nocturnal Audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+
+  /* ── PAGE HERO ── */
+  .remote-hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #1c1a18;
+  }
+  .remote-hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(180,70,20,0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(120,40,10,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 30% at 50% 100%, rgba(60,15,5,0.22) 0%, transparent 70%);
+  }
+  .remote-hero-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--warm-1);
+    margin-bottom: 1rem; position: relative;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .remote-hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--warm-1); }
+  .remote-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 10vw, 110px);
+    line-height: 0.92; letter-spacing: 2px;
+    color: var(--white); position: relative; margin-bottom: 1.5rem;
+  }
+  .remote-hero-title .accent { color: var(--warm-1); }
+  .remote-hero-sub {
+    font-size: 15px; font-weight: 300; font-style: italic;
+    color: var(--muted-lt); max-width: 540px;
+    position: relative; line-height: 1.75; margin-bottom: 2rem;
+  }
+  .remote-hero-actions { display: flex; gap: 1rem; position: relative; flex-wrap: wrap; }
+
+  /* ── MUSE BADGE ── */
+  .powered-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--dark); border: 1px solid #2a2520;
+    border-radius: 2px; padding: 10px 16px;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .powered-badge:hover { border-color: var(--warm-1); color: var(--white); }
+  .powered-badge strong { color: var(--warm-1); font-weight: 500; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { background: var(--off-black); padding: 5rem 2rem; border-bottom: 1px solid #1c1a18; }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+    border: 1px solid #1c1a18;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .how-step {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid #1c1a18;
+    position: relative;
+  }
+  .how-step:last-child { border-right: none; }
+  .how-num {
+    font-family: var(--font-display);
+    font-size: 64px; line-height: 1;
+    color: #1c1a18; margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  .how-title {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .how-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .how-accent { color: var(--warm-1); }
+
+  /* ── WHAT YOU GET ── */
+  .features-section { background: var(--black); padding: 5rem 2rem; border-bottom: 1px solid #1c1a18; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #1c1a18;
+    border: 1px solid #1c1a18;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+  .feature-item {
+    background: var(--off-black);
+    padding: 2rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .feature-icon {
+    width: 36px; height: 36px;
+    background: var(--dark);
+    border: 1px solid #2a2520;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--warm-1);
+  }
+  .feature-title { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .feature-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* ── VIDEO SECTION ── */
+  .video-section { background: var(--off-black); padding: 5rem 2rem; border-bottom: 1px solid #1c1a18; }
+  .video-wrap {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .video-embed {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: var(--dark);
+    border: 1px solid #1c1a18;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .video-embed iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .video-text h3 {
+    font-family: var(--font-display);
+    font-size: 36px; letter-spacing: 1px;
+    color: var(--white); line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .video-text h3 span { color: var(--warm-1); }
+  .video-text p {
+    font-size: 14px; color: var(--muted-lt);
+    line-height: 1.75; margin-bottom: 1.25rem;
+  }
+  .muse-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--warm-1);
+    text-decoration: none; transition: gap 0.2s;
+  }
+  .muse-link:hover { gap: 12px; }
+
+  /* ── WHAT TO BRING ── */
+  .prep-section { background: var(--black); padding: 5rem 2rem; border-bottom: 1px solid #1c1a18; }
+  .prep-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  .prep-col h3 {
+    font-size: 11px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--warm-1);
+    margin-bottom: 1.5rem;
+  }
+  .prep-list { list-style: none; }
+  .prep-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #1c1a18;
+    font-size: 13px; color: var(--muted-lt); line-height: 1.5;
+  }
+  .prep-list li:last-child { border-bottom: none; }
+  .prep-check {
+    width: 18px; height: 18px; flex-shrink: 0;
+    border: 1px solid var(--warm-3);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .prep-check svg { color: var(--warm-1); }
+
+  /* ── RATES ── */
+  .rates-section { background: var(--off-black); padding: 5rem 2rem; border-bottom: 1px solid #1c1a18; }
+  .rates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .rate-card {
+    border: 1px solid #1c1a18;
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--dark);
+  }
+  .rate-card.featured { border-color: var(--warm-2); }
+  .rate-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #1c1a18;
+  }
+  .rate-card.featured .rate-header { background: rgba(196,98,42,0.08); }
+  .rate-badge {
+    display: inline-block;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--warm-1); margin-bottom: 8px;
+  }
+  .rate-name {
+    font-family: var(--font-display);
+    font-size: 28px; letter-spacing: 1px;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .rate-price {
+    font-size: 24px; font-weight: 500; color: var(--warm-1);
+  }
+  .rate-price span { font-size: 13px; color: var(--muted); font-weight: 400; }
+  .rate-body { padding: 1.5rem; }
+  .rate-features { list-style: none; margin-bottom: 1.5rem; }
+  .rate-features li {
+    font-size: 12px; color: var(--muted-lt);
+    padding: 6px 0; border-bottom: 1px solid #1c1a18;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rate-features li:last-child { border-bottom: none; }
+  .rate-features li::before {
+    content: ''; display: block;
+    width: 4px; height: 4px;
+    background: var(--warm-1); border-radius: 50%; flex-shrink: 0;
+  }
+  .rate-btn {
+    display: block; width: 100%; padding: 12px;
+    background: transparent; border: 1px solid #2a2520;
+    color: var(--muted); font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; border-radius: 2px; cursor: pointer;
+    font-family: var(--font-body); text-decoration: none;
+    text-align: center; transition: all 0.2s;
+  }
+  .rate-btn:hover, .rate-card.featured .rate-btn { border-color: var(--warm-1); color: var(--warm-1); }
+  .rate-card.featured .rate-btn:hover { background: var(--warm-2); color: var(--white); border-color: var(--warm-2); }
+
+  /* ── BOOK FORM ── */
+  .book-section { background: var(--black); padding: 5rem 2rem; }
+  .book-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .book-info h3 {
+    font-family: var(--font-display);
+    font-size: 48px; letter-spacing: 1px;
+    color: var(--white); margin-bottom: 1rem; line-height: 1;
+  }
+  .book-info h3 span { color: var(--warm-1); }
+  .book-info p { font-size: 14px; color: var(--muted-lt); line-height: 1.75; margin-bottom: 1.5rem; }
+  .book-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+  .book-detail span { color: var(--white); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-step:nth-child(2) { border-right: none; }
+    .features-grid { grid-template-columns: 1fr; }
+    .video-wrap { grid-template-columns: 1fr; }
+    .prep-cols { grid-template-columns: 1fr; }
+    .rates-grid { grid-template-columns: 1fr; }
+    .book-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="/" class="logo"><img src="images/logo.svg" alt="Nocturnal Audio logo"></a>
+  <nav>
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#gallery">Events</a>
+    <a href="/#music">Music</a>
+    <a href="/#merch">Merch</a>
+    <a href="/remote-sessions.html" class="active">Remote</a>
+    <a href="/#contact" class="nav-cta">Work With Us</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="remote-hero">
+  <div class="remote-hero-bg"></div>
+  <div class="remote-hero-label">Powered by Muse</div>
+  <h1 class="remote-hero-title">
+    STUDIO<br>
+    QUALITY.<br>
+    <span class="accent">ANY</span><br>
+    WHERE.
+  </h1>
+  <p class="remote-hero-sub">Work with the Nocturnal Audio collective remotely — real sessions, real DAW integration, real results. Distance is no longer a factor.</p>
+  <div class="remote-hero-actions">
+    <a href="#book" class="btn-primary">Book a Remote Session</a>
+    <a href="https://www.musesessions.co/" target="_blank" rel="noopener" class="powered-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Powered by <strong>Muse Sessions</strong>
+    </a>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="section-label">The Process</div>
+  <div class="section-title">How It Works</div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <div class="how-title">Book Your Session</div>
+      <div class="how-desc">Fill out the form below with your project details, preferred dates, and what you need. We'll confirm and send you a Muse session link.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <div class="how-title">Download Muse</div>
+      <div class="how-desc">Download the free <span class="how-accent">Muse app</span> at musesessions.co. It works with any DAW — Pro Tools, Ableton, Logic, whatever you use.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <div class="how-title">Join the Session</div>
+      <div class="how-desc">Click your session link at the scheduled time. Share your instruments, DAW audio, and microphone in real time — we'll hear everything like we're in the same room.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">04</div>
+      <div class="how-title">Walk Away with Files</div>
+      <div class="how-desc">We share final files directly through Muse's built-in file transfer. Stems, mixes, masters — whatever the session calls for, delivered clean.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET -->
+<div class="features-section">
+  <div class="section-label">What's Included</div>
+  <div class="section-title">Studio Grade, Remote</div>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/></svg>
+      </div>
+      <div>
+        <div class="feature-title">Real-Time Audio Collaboration</div>
+        <div class="feature-desc">Muse streams high quality audio from your DAW directly to our session — no latency hacks, no workarounds. Play your instrument and we hear it immediately.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div>
+        <div class="feature-title">Screen Sharing & Control</div>
+        <div class="feature-desc">We can view and control your DAW session with your permission — directing arrangements, adjusting plugins, or coaching your mix in real time.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div>
+        <div class="feature-title">Instant File Transfer</div>
+        <div class="feature-desc">Drag stems, samples, and session files directly into the Muse chat — no Dropbox links, no email attachments. Fast and seamless mid-session.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div>
+        <div class="feature-title">Works with Any DAW</div>
+        <div class="feature-desc">Pro Tools, Ableton Live, Logic Pro, Reaper, FL Studio — Muse's VST3, AU, and AAX plugins integrate with all major platforms on both Mac and Windows.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+      </div>
+      <div>
+        <div class="feature-title">Record Directly Into Your DAW</div>
+        <div class="feature-desc">Use the Muse Recording plugin to capture our direction, coaching, or collaborator audio directly into your session tracks as you go.</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div>
+        <div class="feature-title">Full Collective Access</div>
+        <div class="feature-desc">Depending on your project, we can loop in multiple Nocturnal Audio collaborators — a producer, a songwriter, and an engineer — all in the same Muse session.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div class="video-section">
+  <div class="section-label">See It in Action</div>
+  <div class="section-title">Muse in the Studio</div>
+  <div class="video-wrap">
+    <div class="video-embed">
+      <iframe
+        src="https://www.youtube.com/embed/m5gZTROw828"
+        title="Muse Sessions Demo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="video-text">
+      <h3>The virtual studio is <span>real</span> now.</h3>
+      <p>Muse is not a video call with a shared screen. It's a full audio routing platform built specifically for music production — the difference in session quality is night and day compared to Zoom or FaceTime.</p>
+      <p>We use Muse for everything from songwriter sessions and vocal tracking to mix reviews and artist development check-ins. If you've got a DAW and an internet connection, we can work together.</p>
+      <a href="https://www.musesessions.co/" target="_blank" rel="noopener" class="muse-link">
+        Learn more about Muse
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT TO BRING -->
+<div class="prep-section">
+  <div class="section-label">Come Prepared</div>
+  <div class="section-title">What You Need</div>
+  <div class="prep-cols">
+    <div class="prep-col">
+      <h3>You'll Need</h3>
+      <ul class="prep-list">
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          A computer running Mac (10.15+) or Windows 10+
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          The free Muse app installed — download at musesessions.co
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          A DAW of your choice (or just a microphone — no DAW required for some sessions)
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          A stable internet connection — wired is best but WiFi works
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          Headphones or studio monitors to avoid feedback during the session
+        </li>
+      </ul>
+    </div>
+    <div class="prep-col">
+      <h3>Bring to the Session</h3>
+      <ul class="prep-list">
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          Reference tracks — songs that capture the vibe you're going for
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          Any existing session files or stems you want us to work with
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          A clear idea of your goals for the session — the more specific the better
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          Your instruments tuned and ready — don't spend session time on setup
+        </li>
+        <li>
+          <div class="prep-check"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg></div>
+          An open mind — some of the best work happens when you let the session breathe
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- RATES -->
+<div class="rates-section">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Session Rates</div>
+  <div class="rates-grid">
+    <div class="rate-card">
+      <div class="rate-header">
+        <div class="rate-badge">Starter</div>
+        <div class="rate-name">Quick Session</div>
+        <div class="rate-price">Contact us <span>/ 1 hr</span></div>
+      </div>
+      <div class="rate-body">
+        <ul class="rate-features">
+          <li>1 hour remote session via Muse</li>
+          <li>1 Nocturnal Audio collaborator</li>
+          <li>Session notes and direction</li>
+          <li>File transfer via Muse</li>
+          <li>Great for quick feedback or demos</li>
+        </ul>
+        <a href="#book" class="rate-btn">Book Now</a>
+      </div>
+    </div>
+    <div class="rate-card featured">
+      <div class="rate-header">
+        <div class="rate-badge">Most Popular</div>
+        <div class="rate-name">Half Day</div>
+        <div class="rate-price">Contact us <span>/ 4 hrs</span></div>
+      </div>
+      <div class="rate-body">
+        <ul class="rate-features">
+          <li>4 hour remote session via Muse</li>
+          <li>Up to 2 Nocturnal Audio collaborators</li>
+          <li>Full production or mix session</li>
+          <li>File transfer + session recap</li>
+          <li>Ideal for tracking or artist development</li>
+        </ul>
+        <a href="#book" class="rate-btn">Book Now</a>
+      </div>
+    </div>
+    <div class="rate-card">
+      <div class="rate-header">
+        <div class="rate-badge">Full Production</div>
+        <div class="rate-name">Full Day</div>
+        <div class="rate-price">Contact us <span>/ 8 hrs</span></div>
+      </div>
+      <div class="rate-body">
+        <ul class="rate-features">
+          <li>8 hour remote session via Muse</li>
+          <li>Full collective access</li>
+          <li>Tracking, production, and direction</li>
+          <li>End-of-day deliverables package</li>
+          <li>Best for full song production</li>
+        </ul>
+        <a href="#book" class="rate-btn">Book Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING FORM -->
+<div class="book-section" id="book">
+  <div class="book-wrap">
+    <div class="book-info">
+      <div class="section-label">Book a Session</div>
+      <h3>Let's make<br>something<br><span>together.</span></h3>
+      <p>Fill out the form and we'll get back to you within 24 hours to confirm your session, share a Muse link, and answer any questions.</p>
+      <div class="book-detail">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#776e64" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span>info@nocturnal.audio</span>
+      </div>
+      <div class="book-detail">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#776e64" stroke-width="1.5"><path d="M21 16.92a2 2 0 00-1.22-1.85l-4-1.5a2 2 0 00-2.1.48l-1.2 1.2a15.8 15.8 0 01-7.03-7.03l1.2-1.2a2 2 0 00.48-2.1l-1.5-4A2 2 0 004 1H3a2 2 0 00-2 2v1c0 9.94 8.06 18 18 18h1a2 2 0 002-2v-1z"/></svg>
+        <span>(904) 424-2380</span>
+      </div>
+      <div class="book-detail">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#776e64" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Sessions available Mon–Sat, flexible hours</span>
+      </div>
+    </div>
+    <form name="remote-session" method="POST" data-netlify="true" action="/">
+      <input type="hidden" name="form-name" value="remote-session">
+      <div class="form-row">
+        <div class="form-field"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+        <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+      </div>
+      <div class="form-field">
+        <label>Session Type</label>
+        <select name="session_type">
+          <option>Quick Session (1 hr)</option>
+          <option>Half Day (4 hrs)</option>
+          <option>Full Day (8 hrs)</option>
+          <option>Not sure — let's talk</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>What are you working on?</label>
+        <select name="project_type">
+          <option>Songwriting / Co-writing</option>
+          <option>Vocal Tracking</option>
+          <option>Instrument Recording</option>
+          <option>Music Production</option>
+          <option>Mixing / Mastering Review</option>
+          <option>Artist Development</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Preferred Date(s)</label><input type="text" name="dates" placeholder="e.g. Any weekday after May 1, or specific date"></div>
+      <div class="form-field"><label>DAW You Use</label><input type="text" name="daw" placeholder="e.g. Ableton Live, Pro Tools, Logic, none"></div>
+      <div class="form-field"><label>Tell us about your project</label><textarea name="message" placeholder="What are you making? Where are you in the process? What do you need most from this session?" style="height:120px;"></textarea></div>
+      <button type="submit" class="form-submit">Request a Session</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo"><img src="images/logo.svg" alt="Nocturnal Audio logo"></a>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/nocturnal.audio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a>
+  </div>
+  <div class="footer-copy">© 2026 Nocturnal Audio LLC</div>
+</footer>
+
+</body>
+</html>

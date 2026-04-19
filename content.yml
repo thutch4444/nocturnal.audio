@@ -5,7 +5,7 @@ site:
   phone: (904) 424-2380
   city: North Florida
   instagram: https://www.instagram.com/nocturnal.audio/
-  facebook: https://www.facebook.com/profile.php?id=61552022829980
+  facebook: https://facebook.com
   soundcloud: https://soundcloud.com
 hero:
   eyebrow: Nocturnal.Audio - A Creative Collective
@@ -75,7 +75,7 @@ music:
 merch:
   label: Merch
   title: Get Nocturnal
-  items:
+ items:
     - name: Nocturnal Tee
       price: $28
       image: "images/merch-tee.jpg"
@@ -90,7 +90,9 @@ merch:
       price: $30
       image: "images/merch-utility-bag.jpg"
       alt: Utility Bag
-      url: "https://nocturnal-audio.myshopify.com/products/utility-crossbody-bag"
+      url: "https://nocturnal-audio.myshopify.com/products/utility-bag"
+
+
 contact:
   label: Get in Touch
   title: Ready to make something?
