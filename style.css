@@ -257,9 +257,10 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
 @media (max-width: 768px) {
   header { padding: 0.45rem 1rem; min-height: 76px; position: relative; }
   .logo img { height: 34px; }
-  .nav-toggle { display: inline-flex; margin-top: 0.1rem; }
+  .nav-toggle { display: none; margin-top: 0.1rem; }
+  .nav-ready .nav-toggle { display: inline-flex; }
   nav {
-    display: none;
+    display: flex;
     position: absolute;
     top: 100%;
     left: 0;
@@ -273,7 +274,8 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
     align-items: flex-start;
     gap: 0.65rem;
   }
-  .nav-open nav { display: flex; }
+  .nav-ready nav { display: none; }
+  .nav-ready.nav-open nav { display: flex; }
   nav a { width: 100%; padding: 0.45rem 0; }
   nav a.nav-cta {
     width: auto;

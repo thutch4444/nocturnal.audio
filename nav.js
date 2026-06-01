@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = header.querySelector('.nav-toggle');
   if (!nav || !toggle) return;
 
+  header.classList.add('nav-ready');
+
   const closeMenu = () => {
     header.classList.remove('nav-open');
     toggle.setAttribute('aria-expanded', 'false');
