@@ -13,40 +13,26 @@
 <body>
 
 <div id="loading">
-  <div class="l-logo"><img src="images/logo.png" alt="Nocturnal Audio logo"></div>
+  <div class="l-logo">NOCTURNAL<span>.</span>AUDIO</div>
   <div class="l-bar"><div class="l-fill"></div></div>
 </div>
 
 <div id="app" style="display:none;">
 
   <header>
-    <a href="/" class="logo"><img src="images/logo.png" alt="Nocturnal Audio logo"></a>
-    <!-- Desktop nav — hidden on mobile via CSS -->
-    <nav class="desktop-nav">
+    <a href="/" class="logo"><img src="images/logo.svg" alt="Nocturnal Audio"></a>
+    <nav>
       <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#gallery">Events</a>
+      <a href="#gallery">Gallery</a>
       <a href="#music">Music</a>
       <a href="#merch">Merch</a>
-      <a href="remote-sessions.html">Remote</a>
+      <a href="/remote-sessions.html">Remote Sesions</a>
+      <a href="/gear.html">Gear</a>
       <a href="#contact" class="nav-cta">Work With Us</a>
     </nav>
-    <!-- Hamburger — hidden on desktop via CSS, shown on mobile -->
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-tagline">A Creative Collective</div>
   </header>
-
-  <!-- Mobile dropdown menu -->
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="#about" onclick="closeMobileMenu()">About</a>
-    <a href="#services" onclick="closeMobileMenu()">Services</a>
-    <a href="#gallery" onclick="closeMobileMenu()">Events</a>
-    <a href="#music" onclick="closeMobileMenu()">Music</a>
-    <a href="#merch" onclick="closeMobileMenu()">Merch</a>
-    <a href="remote-sessions.html" onclick="closeMobileMenu()">Remote Sessions</a>
-    <a href="#contact" onclick="closeMobileMenu()">Work With Us</a>
-  </div>
 
   <!-- HERO -->
   <div class="hero">
@@ -68,6 +54,7 @@
 
   <!-- SERVICES -->
   <div class="services-bar" id="services">
+    <div class="services-label section-label">Services</div>
     <div class="services-grid" id="services-grid"></div>
   </div>
 
@@ -155,7 +142,7 @@
   </section>
 
   <footer>
-    <a href="/" class="footer-logo"><img src="images/logo.png" alt="Nocturnal Audio"></a>
+    <div class="footer-logo">NOCTURNAL<span>.</span>AUDIO</div>
     <div class="footer-links" id="footer-links"></div>
     <div class="footer-copy" id="footer-copy"></div>
   </footer>

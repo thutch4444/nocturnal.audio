@@ -5,10 +5,10 @@ site:
   phone: (904) 424-2380
   city: North Florida
   instagram: https://www.instagram.com/nocturnal.audio/
-  facebook: https://www.facebook.com/profile.php?id=61552022829980
+  facebook: https://facebook.com
   soundcloud: https://soundcloud.com
 hero:
-  eyebrow:  A Creative Collective
+  eyebrow: Nocturnal.Audio - A Creative Collective
   headline_line1: WE STAY
   headline_line2: UP LATE
   headline_line3: TO
@@ -37,7 +37,7 @@ services:
   - name: Merch Development
     description: Design, production, and fulfillment for artists & events
 gallery:
-  label: Events & Sessions
+  label: Gallery
   title: Recent Work
   items:
     - tag: Live Event
@@ -76,23 +76,19 @@ merch:
   label: Merch
   title: Get Nocturnal
   items:
-    - name: Nocturnal Tee
+    - name: Nocturnal Tee — Black
       price: $28
       image: "images/merch-tee.jpg"
-      alt: Nocturnal Audio Tee
-      url: "https://nocturnal-audio.myshopify.com/products/unisex-classic-tee"
+      alt: Nocturnal Audio black tee
     - name: Nocturnal Audio Snapback Hat
       price: $34
       image: "images/merch-hat.jpg"
       alt: Nocturnal Audio Snapback Hat
-      url: "https://nocturnal-audio.myshopify.com/products/snapback-hat"
+      url: "https://nocturnal-audio.myshopify.com/products/snapback-hat?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web"
     - name: Utility Bag
       price: $30
       image: "images/merch-utility-bag.jpg"
       alt: Utility Bag
-      url: "https://nocturnal-audio.myshopify.com/products/utility-bag"
-
-
 contact:
   label: Get in Touch
   title: Ready to make something?

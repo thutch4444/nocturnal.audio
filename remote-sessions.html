@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1rem 2rem 4rem;
+    padding: 2rem 2rem 4rem;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid #1c1a18;
@@ -285,41 +285,30 @@
 
 <!-- HEADER -->
 <header>
-  <a href="/" class="logo"><img src="images/logo.png" alt="Nocturnal Audio logo"></a>
-  <nav class="desktop-nav">
+  <a href="/" class="logo"><img src="images/logo.svg" alt="Nocturnal Audio"></a>
+  <nav>
     <a href="/#about">About</a>
     <a href="/#services">Services</a>
-    <a href="/#gallery">Events</a>
+    <a href="/#gallery">Gallery</a>
     <a href="/#music">Music</a>
     <a href="/#merch">Merch</a>
-    <a href="/remote-sessions.html" class="active">Remote</a>
-    <a href="#book" class="nav-cta">Book a Session</a>
+    <a href="/remote-sessions.html" class="active">Remote Sesions</a>
+    <a href="/gear.html">Gear</a>
+    <a href="/#contact" class="nav-cta">Work With Us</a>
   </nav>
-  <button class="hamburger" id="hamburger" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="header-tagline">A Creative Collective</div>
 </header>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/">Home</a>
-  <a href="/#about">About</a>
-  <a href="/#services">Services</a>
-  <a href="/#gallery">Events</a>
-  <a href="/#music">Music</a>
-  <a href="/#merch">Merch</a>
-  <a href="#book">Book a Session</a>
-</div>
 
 <!-- HERO -->
 <div class="remote-hero">
   <div class="remote-hero-bg"></div>
-  <div class="remote-hero-label">Powered by Muse</div>
   <h1 class="remote-hero-title">
     STUDIO<br>
     QUALITY.<br>
     <span class="accent">ANY</span><br>
     WHERE.
   </h1>
+  <div class="remote-hero-label">Powered by Muse</div>
   <p class="remote-hero-sub">Work with the Nocturnal Audio collective remotely — real sessions, real DAW integration, real results. Distance is no longer a factor.</p>
   <div class="remote-hero-actions">
     <a href="#book" class="btn-primary">Book a Remote Session</a>
@@ -619,31 +608,14 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="/" class="footer-logo"><img src="images/logo.png" alt="Nocturnal Audio logo"></a>
+  <a href="/" class="footer-logo">NOCTURNAL<span>.</span>AUDIO</a>
   <div class="footer-links">
     <a href="https://www.instagram.com/nocturnal.audio/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.facebook.com/profile.php?id=61552022829980" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
     <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a>
   </div>
   <div class="footer-copy">© 2026 Nocturnal Audio LLC</div>
 </footer>
 
-
-<script>
-(function() {
-  var hamburger = document.getElementById('hamburger');
-  var mobileMenu = document.getElementById('mobile-menu');
-  if (!hamburger || !mobileMenu) return;
-  hamburger.addEventListener('click', function(e) {
-    e.stopPropagation();
-    mobileMenu.classList.toggle('open');
-  });
-  document.addEventListener('click', function(e) {
-    if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
-      mobileMenu.classList.remove('open');
-    }
-  });
-})();
-</script>
 </body>
 </html>

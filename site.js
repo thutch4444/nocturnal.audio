@@ -1,4 +1,6 @@
 // ── NOCTURNAL AUDIO — site.js ──
+// Fetches content.yml and builds the page dynamically.
+// Falls back gracefully if fetch fails (e.g. opening file:// locally).
 
 const placeholderSVG = `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><rect x="4" y="8" width="32" height="24" rx="2"/><circle cx="15" cy="18" r="4"/><path d="M4 28l8-7 6 5 5-4 13 10"/></svg>`;
 const musicNoteSVG = `<svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3 8.5l-4 2.5V5l4 2.5z"/></svg>`;
@@ -16,6 +18,8 @@ let currentTrackIndex = 0;
 let isPlaying = false;
 
 // ── BOOT ──
+// Try fetching content.yml. If that fails (e.g. local file:// or CORS),
+// show a helpful error rather than a blank loading screen.
 fetch('/content.yml')
   .then(r => {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -26,10 +30,11 @@ fetch('/content.yml')
     buildSite(data);
     document.getElementById('loading').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    initHamburger(); // must run AFTER app is visible
+    scrollToHash();
   })
   .catch(err => {
     console.warn('fetch /content.yml failed:', err.message);
+    // Show friendly local dev message
     document.getElementById('loading').innerHTML = `
       <div style="color:#776e64;font-family:sans-serif;font-size:14px;text-align:center;max-width:400px;padding:2rem;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:#ede8df;margin-bottom:1rem;">
@@ -53,29 +58,12 @@ if (window.netlifyIdentity) {
   });
 }
 
-// ── HAMBURGER ──
-function initHamburger() {
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (!hamburger || !mobileMenu) return;
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    mobileMenu.classList.toggle('open');
-  });
-  document.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
-      mobileMenu.classList.remove('open');
-    }
-  });
-}
-
-function closeMobileMenu() {
-  const m = document.getElementById('mobile-menu');
-  if (m) m.classList.remove('open');
-}
+window.addEventListener('hashchange', scrollToHash);
 
 // ── BUILD SITE ──
 function buildSite(d) {
+
+  // HERO
   const h = d.hero;
   document.getElementById('hero-eyebrow').textContent = h.eyebrow;
   document.getElementById('hero-title').innerHTML =
@@ -88,9 +76,11 @@ function buildSite(d) {
     `<a href="#contact" class="btn-primary">${h.cta_primary}</a>
      <a href="#about" class="btn-outline">${h.cta_secondary}</a>`;
 
+  // ABOUT
   document.getElementById('about-label').textContent = d.about.label;
   document.getElementById('about-text').textContent = d.about.text;
 
+  // SERVICES
   document.getElementById('services-grid').innerHTML = d.services.map((s, i) => `
     <div class="service-item">
       ${serviceIcons[i] || ''}
@@ -98,6 +88,7 @@ function buildSite(d) {
       <div class="service-desc">${s.description}</div>
     </div>`).join('');
 
+  // GALLERY
   document.getElementById('gallery-label').textContent = d.gallery.label;
   document.getElementById('gallery-title').textContent = d.gallery.title;
   document.getElementById('gallery-grid').innerHTML = d.gallery.items.map((item, i) => `
@@ -108,12 +99,14 @@ function buildSite(d) {
       <div class="gallery-tag">${item.tag}</div>
     </div>`).join('');
 
+  // MUSIC
   document.getElementById('music-label').textContent = d.music.label;
   document.getElementById('music-title').textContent = d.music.title;
   tracks = d.music.tracks || [];
   renderTrackList();
   if (tracks[0]) document.getElementById('track-end').textContent = tracks[0].duration;
 
+  // MERCH
   document.getElementById('merch-label').textContent = d.merch.label;
   document.getElementById('merch-title').textContent = d.merch.title;
   document.getElementById('merch-grid').innerHTML = d.merch.items.map(item => {
@@ -134,6 +127,7 @@ function buildSite(d) {
     </${tag}>`;
   }).join('');
 
+  // CONTACT
   document.getElementById('contact-label').textContent = d.contact.label;
   document.getElementById('contact-title').textContent = d.contact.title;
   document.getElementById('contact-body').textContent = d.contact.body;
@@ -142,6 +136,7 @@ function buildSite(d) {
   document.getElementById('contact-city').textContent = d.site.city;
   document.getElementById('contact-services').innerHTML = d.contact.services.map(s => `<option>${s}</option>`).join('');
 
+  // FOOTER
   document.getElementById('footer-links').innerHTML = `
     <a href="${d.site.instagram}" target="_blank" rel="noopener">Instagram</a>
     <a href="${d.site.facebook}" target="_blank" rel="noopener">Facebook</a>
@@ -152,6 +147,20 @@ function buildSite(d) {
   initContactForm();
 }
 
+function scrollToHash() {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+// ── TRACK LIST ──
 function renderTrackList() {
   document.getElementById('track-list').innerHTML = tracks.map((t, i) => `
     <div class="track-item${i === currentTrackIndex ? ' active' : ''}" data-index="${i}">
@@ -166,33 +175,43 @@ function renderTrackList() {
     </div>`).join('');
 }
 
+// ── PLAYER ──
 function initPlayer() {
   audio = document.getElementById('audio-player');
   if (!audio || tracks.length === 0) return;
+
   updateTrackNote();
   loadTrack(currentTrackIndex);
+
   document.getElementById('track-list').addEventListener('click', e => {
     const item = e.target.closest('.track-item');
     if (!item) return;
     const index = Number(item.dataset.index);
     if (!Number.isNaN(index)) selectTrack(index);
   });
+
   document.getElementById('play-btn').addEventListener('click', () => {
     if (!tracks[currentTrackIndex] || !tracks[currentTrackIndex].url) return;
     isPlaying ? pauseTrack() : playTrack();
   });
+
   document.getElementById('prev-btn').addEventListener('click', () => {
+    if (tracks.length === 0) return;
     selectTrack((currentTrackIndex - 1 + tracks.length) % tracks.length);
   });
+
   document.getElementById('next-btn').addEventListener('click', () => {
+    if (tracks.length === 0) return;
     selectTrack((currentTrackIndex + 1) % tracks.length);
   });
+
   document.getElementById('progress-bar').addEventListener('click', e => {
     if (!audio.duration || !audio.src) return;
     const rect = document.getElementById('progress-bar').getBoundingClientRect();
     const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     audio.currentTime = pct * audio.duration;
   });
+
   audio.addEventListener('timeupdate', updateProgress);
   audio.addEventListener('loadedmetadata', updateProgress);
   audio.addEventListener('ended', () => {
@@ -210,8 +229,13 @@ function loadTrack(index) {
   document.getElementById('track-end').textContent = track.duration || '0:00';
   document.getElementById('track-current').textContent = '0:00';
   document.getElementById('progress-fill').style.width = '0%';
-  if (track.url) { audio.src = track.url; audio.load(); }
-  else { audio.removeAttribute('src'); audio.pause(); }
+  if (track.url) {
+    audio.src = track.url;
+    audio.load();
+  } else {
+    audio.removeAttribute('src');
+    audio.pause();
+  }
   isPlaying = false;
   updatePlayButton();
   updateTrackNote();
@@ -268,14 +292,17 @@ function updateTrackNote(msg) {
     : 'Add audio files to your audio/ folder and set URLs in content.yml';
 }
 
+// ── CONTACT FORM ──
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
+
   form.addEventListener('submit', () => {
     const btn = form.querySelector('.form-submit');
     btn.textContent = 'Sending...';
     btn.disabled = true;
   });
+
   document.addEventListener('nfFormSubmitSuccess', () => {
     const btn = form.querySelector('.form-submit');
     btn.textContent = 'Message Sent!';
@@ -283,6 +310,7 @@ function initContactForm() {
     form.reset();
     setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; btn.disabled = false; }, 3000);
   });
+
   document.addEventListener('nfFormSubmitError', () => {
     const btn = form.querySelector('.form-submit');
     btn.textContent = 'Error — Try Again';

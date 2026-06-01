@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gear & Rentals — Nocturnal Audio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+
+  /* ── GEAR PAGE HERO ── */
+  .gear-hero {
+    min-height: 52vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #1c1a18;
+  }
+  .gear-hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(180,70,20,0.13) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(120,40,10,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 30% at 50% 100%, rgba(60,15,5,0.22) 0%, transparent 70%);
+  }
+  .gear-hero-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--warm-1);
+    margin-bottom: 1rem; position: relative;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .gear-hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--warm-1); }
+  .gear-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 10vw, 110px);
+    line-height: 0.92; letter-spacing: 2px;
+    color: var(--white); position: relative; margin-bottom: 1.5rem;
+  }
+  .gear-hero-title .accent { color: var(--warm-1); }
+  .gear-hero-sub {
+    font-size: 15px; font-weight: 300; font-style: italic;
+    color: var(--muted-lt); max-width: 560px;
+    position: relative; line-height: 1.75; margin-bottom: 2rem;
+  }
+  .gear-hero-tags { display: flex; gap: 10px; flex-wrap: wrap; position: relative; }
+  .gear-tag {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); border: 1px solid #2a2520;
+    padding: 6px 14px; border-radius: 2px;
+  }
+
+  /* ── CATEGORY SECTIONS ── */
+  .gear-section { padding: 4rem 2rem; border-bottom: 1px solid #1c1a18; }
+  .gear-section:nth-child(odd) { background: var(--off-black); }
+  .gear-section:nth-child(even) { background: var(--black); }
+
+  .gear-section-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 2rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .gear-section-left { flex: 1; min-width: 200px; }
+  .gear-section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--warm-1); margin-bottom: 0.5rem;
+  }
+  .gear-section-title {
+    font-family: var(--font-display);
+    font-size: 40px; letter-spacing: 1px;
+    color: var(--white); line-height: 1; margin-bottom: 0.75rem;
+  }
+  .gear-section-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 480px;
+  }
+  .gear-ideal {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 1rem;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--warm-1); font-style: italic;
+  }
+  .gear-ideal::before {
+    content: ''; display: block;
+    width: 8px; height: 8px;
+    background: var(--warm-1); border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── GEAR GRID ── */
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #1c1a18;
+    border: 1px solid #1c1a18;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .gear-card {
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+  }
+  .gear-photo {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-bottom: 1px solid #1c1a18;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2a2520;
+    position: relative;
+  }
+  .gear-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .gear-card:hover .gear-photo img { transform: scale(1.03); }
+  .gear-photo-placeholder {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+  }
+  .gear-photo-placeholder span {
+    font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; color: #2a2520;
+  }
+  .gear-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+  .gear-card-name {
+    font-size: 13px; font-weight: 500;
+    color: var(--white); margin-bottom: 4px; line-height: 1.3;
+  }
+  .gear-card-sub {
+    font-size: 11px; color: var(--muted); line-height: 1.4;
+  }
+
+  /* ── CUSTOM SECTION ── */
+  .custom-section {
+    background: var(--off-black);
+    border-top: 1px solid #1c1a18;
+    padding: 4rem 2rem;
+  }
+  .custom-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .custom-text h2 {
+    font-family: var(--font-display);
+    font-size: 48px; letter-spacing: 1px;
+    color: var(--white); line-height: 1; margin-bottom: 1rem;
+  }
+  .custom-text h2 span { color: var(--warm-1); }
+  .custom-text p {
+    font-size: 14px; color: var(--muted-lt);
+    line-height: 1.75; margin-bottom: 1rem;
+  }
+  .package-list { list-style: none; margin-bottom: 2rem; }
+  .package-list li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid #1c1a18;
+    font-size: 13px; color: var(--muted-lt);
+  }
+  .package-list li:last-child { border-bottom: none; }
+  .package-list li::before {
+    content: ''; display: block;
+    width: 6px; height: 6px;
+    background: var(--warm-1); border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .gear-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .gear-grid { grid-template-columns: repeat(2, 1fr); }
+    .custom-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .gear-section-header { flex-direction: column; }
+  }
+  @media (max-width: 480px) {
+    .gear-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="/" class="logo"><img src="images/logo.svg" alt="Nocturnal Audio"></a>
+  <nav>
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#gallery">Gallery</a>
+    <a href="/#music">Music</a>
+    <a href="/#merch">Merch</a>
+    <a href="/remote-sessions.html">Remote Sesions</a>
+    <a href="/gear.html" class="active">Gear</a>
+    <a href="/#contact" class="nav-cta">Work With Us</a>
+  </nav>
+  <div class="header-tagline">A Creative Collective</div>
+</header>
+
+<!-- HERO -->
+<div class="gear-hero">
+  <div class="gear-hero-bg"></div>
+  <h1 class="gear-hero-title">
+    GEAR &amp;<br>
+    <span class="accent">RENTALS</span>
+  </h1>
+  <div class="gear-hero-label">Available Now</div>
+  <p class="gear-hero-sub">Professional audio, video, and studio equipment available for sessions, events, content creation, and short-term rentals. You might be surprised what we have.</p>
+  <div class="gear-hero-tags">
+    <span class="gear-tag">Studio Sessions</span>
+    <span class="gear-tag">Content Creation</span>
+    <span class="gear-tag">Event Production</span>
+    <span class="gear-tag">Short-Term Rentals</span>
+  </div>
+</div>
+
+<!-- STUDIO & PODCAST -->
+<div class="gear-section">
+  <div class="gear-section-header">
+    <div class="gear-section-left">
+      <div class="gear-section-label">Category 01</div>
+      <div class="gear-section-title">Studio &amp; Podcast</div>
+      <p class="gear-section-desc">Professional tools for podcasting, voiceovers, content creation, and recording. The kind of setup most studios charge a premium for.</p>
+      <div class="gear-ideal">Ideal for podcasts, voiceovers, audiobooks, livestreams, and content creation</div>
+    </div>
+  </div>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-ua-apollo.jpg" alt="Universal Audio Apollo X4">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Universal Audio Apollo X4</div>
+        <div class="gear-card-sub">Thunderbolt audio interface with UAD processing</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-ua-sphere.jpg" alt="Universal Audio Sphere DLX">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Universal Audio Sphere DLX</div>
+        <div class="gear-card-sub">Modeling mic — emulates vintage mics in software</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-neumann-tlm102.jpg" alt="Neumann TLM 102">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Neumann TLM 102</div>
+        <div class="gear-card-sub">Large-diaphragm condenser — studio reference mic</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-xr18.jpg" alt="Behringer XR18">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Behringer XR18 Digital Mixer</div>
+        <div class="gear-card-sub">18-channel digital mixer with app control</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO & CONTENT -->
+<div class="gear-section">
+  <div class="gear-section-header">
+    <div class="gear-section-left">
+      <div class="gear-section-label">Category 02</div>
+      <div class="gear-section-title">Video &amp; Content Creation</div>
+      <p class="gear-section-desc">Create professional content without investing in expensive equipment. Cameras, drones, and production packages available for any project.</p>
+      <div class="gear-ideal">Ideal for social media, real estate, events, interviews, and business content</div>
+    </div>
+  </div>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-dji-osmo.jpg" alt="DJI Pocket Osmo">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">DJI Pocket Osmo</div>
+        <div class="gear-card-sub">3-axis gimbal camera — buttery smooth 4K footage</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-gopro13.jpg" alt="GoPro Hero 13 Black">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">GoPro Hero 13 Black</div>
+        <div class="gear-card-sub">Action camera — waterproof, 5.3K, HDR</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-dji-mini2.jpg" alt="DJI Mini 2 Drone">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">DJI Mini 2 Drone</div>
+        <div class="gear-card-sub">4K aerial — lightweight, FAA-exempt under 250g</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JAPANESE FENDER COLLECTION -->
+<div class="gear-section">
+  <div class="gear-section-header">
+    <div class="gear-section-left">
+      <div class="gear-section-label">Category 03</div>
+      <div class="gear-section-title">Japanese Fender Collection</div>
+      <p class="gear-section-desc">A curated collection of Made-in-Japan Fender instruments — some of the best production guitars ever built. Available for sessions and approved rentals.</p>
+      <div class="gear-ideal">Available for recording sessions, content creation, and approved rentals</div>
+    </div>
+  </div>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-mij-tele.jpg" alt="MIJ Telecaster">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">MIJ Telecaster</div>
+        <div class="gear-card-sub">Made in Japan — classic twang and clarity</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-mij-strat.jpg" alt="MIJ Stratocaster">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">MIJ Stratocaster</div>
+        <div class="gear-card-sub">Made in Japan — three pickups, smooth neck</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-mij-jazzmaster.jpg" alt="MIJ Jazzmaster">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">MIJ Jazzmaster</div>
+        <div class="gear-card-sub">Made in Japan — floating tremolo, warm rhythm circuit</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-mij-baritone.jpg" alt="MIJ Baritone Jazzmaster">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">MIJ Baritone Jazzmaster</div>
+        <div class="gear-card-sub">Extended range — dark, cinematic tones</div>
+      </div>
+    </div>
+  </div>
+  <!-- Aerodyne Bass gets its own row -->
+  <div class="gear-grid" style="margin-top:1px; grid-template-columns: repeat(4,1fr);">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-mij-aerodyne.jpg" alt="MIJ Aerodyne Bass">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">MIJ Aerodyne Bass</div>
+        <div class="gear-card-sub">Sleek bound body — PJ pickup config</div>
+      </div>
+    </div>
+    <div class="gear-card" style="background:transparent;border:none;"></div>
+    <div class="gear-card" style="background:transparent;border:none;"></div>
+    <div class="gear-card" style="background:transparent;border:none;"></div>
+  </div>
+</div>
+
+<!-- PREMIUM GUITARS -->
+<div class="gear-section">
+  <div class="gear-section-header">
+    <div class="gear-section-left">
+      <div class="gear-section-label">Category 04</div>
+      <div class="gear-section-title">Premium Guitars</div>
+      <p class="gear-section-desc">Professional instruments available for recording and performance. Bring the right guitar to your session without bringing your own.</p>
+      <div class="gear-ideal">Great for songwriter sessions, recording projects, and live performances</div>
+    </div>
+  </div>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-lp-studio.jpg" alt="Gibson Les Paul Studio">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Gibson Les Paul Studio</div>
+        <div class="gear-card-sub">Mahogany body, burstbucker humbuckers</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-es339.jpg" alt="Gibson ES-339">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Gibson ES-339</div>
+        <div class="gear-card-sub">Semi-hollow — warm, articulate, versatile</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-martin-gpc.jpg" alt="Martin GPC Special Ovangkol">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Martin GPC Special Ovangkol</div>
+        <div class="gear-card-sub">Grand performance cutaway acoustic</div>
+      </div>
+    </div>
+    <div class="gear-card" style="background:transparent; border: none;"></div>
+  </div>
+</div>
+
+<!-- DRUMS & PRODUCTION -->
+<div class="gear-section">
+  <div class="gear-section-header">
+    <div class="gear-section-left">
+      <div class="gear-section-label">Category 05</div>
+      <div class="gear-section-title">Drums &amp; Production</div>
+      <p class="gear-section-desc">Creative tools for writing, recording, and production. Full electronic kit with acoustic sounds — tracked right into your session.</p>
+      <div class="gear-ideal">Ideal for demos, songwriting, and studio projects</div>
+    </div>
+  </div>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-alesis-strike.jpg" alt="Alesis Strike Pro SE">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Alesis Strike Pro Special Edition</div>
+        <div class="gear-card-sub">Full electronic kit — mesh heads, acoustic feel</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-shure-drum-pack.jpg" alt="Shure Drum Mic Package">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">Shure Drum Mic Package</div>
+        <div class="gear-card-sub">Complete kit mic set — kick, snare, toms, overheads</div>
+      </div>
+    </div>
+    <div class="gear-card" style="background:transparent; border: none;"></div>
+    <div class="gear-card" style="background:transparent; border: none;"></div>
+  </div>
+</div>
+
+<!-- EVENT AUDIO -->
+<div class="gear-section">
+  <div class="gear-section-header">
+    <div class="gear-section-left">
+      <div class="gear-section-label">Category 06</div>
+      <div class="gear-section-title">Event Audio Packages</div>
+      <p class="gear-section-desc">Simple, professional audio solutions for events and presentations. Scalable from intimate gatherings to full venue coverage.</p>
+      <div class="gear-ideal">Great for networking events, presentations, private parties, and live music</div>
+    </div>
+  </div>
+  <div class="gear-grid">
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-ev-everse8.jpg" alt="EV Everse 8">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">EV Everse 8 Speaker Package</div>
+        <div class="gear-card-sub">Portable powered speakers — battery or AC</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-ev-sub.jpg" alt="EV ELX200-12SP Subwoofer">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">EV ELX200-12SP Subwoofer Package</div>
+        <div class="gear-card-sub">Powered 12" sub — adds punch and depth to any event</div>
+      </div>
+    </div>
+    <div class="gear-card">
+      <div class="gear-photo">
+        <img src="images/gear-xr18-event.jpg" alt="XR18 Event Mixer Package">
+      </div>
+      <div class="gear-card-body">
+        <div class="gear-card-name">XR18 Event Mixer Package</div>
+        <div class="gear-card-sub">Digital mixing — controlled from any phone or tablet</div>
+      </div>
+    </div>
+    <div class="gear-card" style="background:transparent; border: none;"></div>
+  </div>
+</div>
+
+<!-- CUSTOM / CTA -->
+<div class="custom-section">
+  <div class="custom-inner">
+    <div class="custom-text">
+      <div class="section-label">Need Something Custom?</div>
+      <h2>Let's build your <span>package.</span></h2>
+      <p>Most of our gear is available as part of a larger service — not just a standalone rental. That means you get the gear AND the expertise behind it.</p>
+      <ul class="package-list">
+        <li>Studio Sessions — gear included in session rate</li>
+        <li>Content Creation Packages — camera, audio, and direction</li>
+        <li>Event Production Services — full setup and operation</li>
+        <li>Equipment Rental — self-operated with briefing included</li>
+      </ul>
+      <a href="/#contact" class="btn-primary">Check Availability</a>
+    </div>
+    <div>
+      <div style="background:var(--dark);border:1px solid #1c1a18;border-radius:2px;padding:2rem;">
+        <div class="section-label" style="margin-bottom:1rem;">A Note on Rentals</div>
+        <p style="font-size:13px;color:var(--muted-lt);line-height:1.75;margin-bottom:1rem;">Most items are available for self-operated rental with a brief walkthrough. Instruments and sensitive equipment require approval and may include a security deposit.</p>
+        <p style="font-size:13px;color:var(--muted-lt);line-height:1.75;margin-bottom:1rem;">We also offer operator-included packages for events and content shoots — you focus on the project, we handle the gear.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.75;">Contact us for current availability, pricing, and package options.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">NOCTURNAL<span>.</span>AUDIO</a>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/nocturnal.audio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/profile.php?id=61552022829980" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a>
+  </div>
+  <div class="footer-copy">© 2026 Nocturnal Audio LLC</div>
+</footer>
+
+</body>
+</html>
