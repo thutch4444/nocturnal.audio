@@ -286,7 +286,10 @@
 <!-- HEADER -->
 <header>
   <a href="/" class="logo"><img src="images/logo.svg" alt="Nocturnal Audio"></a>
-  <nav>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="site-nav">
     <a href="/#about">About</a>
     <a href="/#services">Services</a>
     <a href="/#gallery">Gallery</a>
@@ -617,5 +620,6 @@
   <div class="footer-copy">© 2026 Nocturnal Audio LLC</div>
 </footer>
 
+<script src="nav.js"></script>
 </body>
 </html>

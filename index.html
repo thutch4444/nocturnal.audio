@@ -21,7 +21,10 @@
 
   <header>
     <a href="/" class="logo"><img src="images/logo.svg" alt="Nocturnal Audio"></a>
-    <nav>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav">
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#gallery">Gallery</a>
@@ -150,6 +153,7 @@
 </div>
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="nav.js"></script>
 <script src="site.js"></script>
 </body>
 </html>
