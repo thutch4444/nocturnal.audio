@@ -59,6 +59,30 @@ nav { display: flex; gap: 1.75rem; align-items: center; margin-top: 0.05rem; }
 nav a { font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
 nav a:hover { color: var(--white); }
 nav a.active { color: var(--white); }
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #2a2520;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--white);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .nav-cta { color: var(--white) !important; background: var(--warm-2); padding: 8px 18px; border-radius: 2px; }
 .nav-cta:hover { background: var(--warm-3) !important; }
 .header-tagline {
@@ -231,8 +255,31 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  header { padding: 0.45rem 1rem; min-height: 76px; }
+  header { padding: 0.45rem 1rem; min-height: 76px; position: relative; }
   .logo img { height: 34px; }
+  .nav-toggle { display: inline-flex; margin-top: 0.1rem; }
+  nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    margin-top: 0;
+    padding: 0.75rem 1rem 1rem;
+    background: rgba(8,8,8,0.98);
+    border-bottom: 1px solid #1c1a18;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+  .nav-open nav { display: flex; }
+  nav a { width: 100%; padding: 0.45rem 0; }
+  nav a.nav-cta {
+    width: auto;
+    padding: 9px 14px;
+    margin-top: 0.35rem;
+  }
   .header-tagline {
     left: 1rem;
     bottom: 0.35rem;
@@ -241,7 +288,7 @@ footer { background: var(--off-black); border-top: 1px solid #1c1a18; padding: 2
     gap: 8px;
   }
   .header-tagline::before { width: 18px; }
-  nav a:not(.nav-cta) { display: none; }
+  .nav-open .header-tagline { display: none; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-grid { grid-template-columns: 1fr 1fr; }
   .gallery-item.tall { grid-row: span 1; aspect-ratio: 4/3; }
